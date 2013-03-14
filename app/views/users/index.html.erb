@@ -1,0 +1,58 @@
+<div class="row" id="user_gallery">
+  <div class="span12 gallery">
+    <% if @event %>
+      <h4 id="event_header"><%= @event.name %></h4>
+      <h5>
+        <%= @event.date.to_s(:full) %><br />
+
+        <% if @event.venue.present? %>
+          <%= @event.venue %><br />
+        <% end %>
+
+        <span class="event_city muted"><%= @event.location %></span>
+      </h5>
+
+      <% if !current_user %>
+        <p><%= link_to "Log in to mark your attendance.", login_path(:return_to_url => event_path(@event.slug)), :class => "btn btn-primary btn-mini" %></p>
+      <% end %>
+
+      <% if current_user && @event.is_current %>
+        <%= form_tag event_attend_path(@event.id) do %>
+          <% if @event.link.present? %>
+            <%= link_to "Event Website", @event.link, :class => "btn btn-mini" %>
+          <% end %>&nbsp;
+
+          <% if current_user.events.exists?(@event) %>
+            <%= button_tag "Cancel Your Attendance", :type => "submit", :class => "btn btn-danger btn-mini" %>
+          <% else %>
+            <%= button_tag "Attend", :type => "submit", :class => "btn btn-primary btn-mini" %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <hr />
+    <% end %>
+
+    <h4 id="quiz_header" class="inactive">&nbsp;<i class="icon-bolt"></i> <span>Activate Quiz Mode</span></h4>
+
+    <ul id="filterOptions" class="gallery-cats clearfix">
+      <% if @event %>
+        <li id="category_filter_all" class="active"><%= link_to "All", root_path(:event => @event.slug), :class => "all" %></li> 
+      <% else %>
+        <li id="category_filter_all" class="active"><%= link_to "All", :root, :class => "all" %></li> 
+      <% end %>
+
+      <% @active_categories.each do |k, v| %>
+        <% if @event %>
+          <li id="category_filter_<%= k %>"><%= link_to v, category_path(k, :event => @event.slug), :class => k %></li>
+        <% else %>
+          <li id="category_filter_<%= k %>"><%= link_to v, category_path(k), :class => k %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    
+    <div id="user_gallery_container">
+      <%= render :partial => "user_gallery_container" %>
+    </div>
+  </div>
+</div>

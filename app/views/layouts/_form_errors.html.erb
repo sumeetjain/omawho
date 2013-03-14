@@ -1,0 +1,9 @@
+<% if form_model.errors.any? %>
+	<div class="alert alert-block alert-error">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	
+    <% form_model.errors.full_messages.each do |msg| %>
+			<%= msg %>.<br />
+    <% end %>
+	</div>
+<% end %>

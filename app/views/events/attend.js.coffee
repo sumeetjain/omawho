@@ -1,0 +1,1 @@
+$("#event_row_#{<%= @event.id %>}").empty().html("<%= escape_javascript(render :partial => 'row', :locals => {:event => @event}) %>")

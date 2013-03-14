@@ -1,0 +1,74 @@
+<% @page_title = "#{@user.name}" %>
+<% @page_description = @user.bio.present? ? @user.bio : "#{@user.name}'s profile on Omawho." %>
+
+<div class="row">
+  <div class="span12 gallery-single">
+
+    <div class="row">
+      <div class="span6">
+        <% if @user.image %>
+          <%= image_tag @user.image.file.square, :alt => @user.name, :class => "thumbnail" %>
+        <% else %>
+          <%= image_tag "default_pic.jpg", :alt => @user.name, :class => "thumbnail" %>
+        <% end %>
+      </div>
+      <div class="span6">
+        <h2>
+          <%= @user.name %>
+          
+          <% if @user.twitter.present? %>
+            <a href="https://twitter.com/<%= @user.twitter %>" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @<%= @user.twitter %></a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          <% end %>
+        </h2>
+
+        <% if @user.company.present? %>
+          <h4><%= @user.company %></h4>
+        <% end %>
+        
+        <h5 class="muted"><%= User::CATEGORIES[@user.category] %></h5>
+        <p class="lead"><%= @user.bio %></p>
+
+        <ul class="project-info">
+          <% if @user.twitter.present? %>
+            <li>
+             <h6><i class="icon-twitter"></i> Twitter:</h6> <%= link_to "@#{@user.twitter}", @user.twitter_url %>
+            </li>
+          <% end %>
+          
+          <% if @user.facebook.present? %>
+            <li><h6><i class="icon-facebook"></i> Facebook:</h6> <%= link_to @user.facebook, @user.facebook_url %></li>
+          <% end %>
+          
+          <% if @user.github.present? %>
+            <li>
+              <h6><i class="icon-github"></i> Github:</h6> <%= link_to @user.github, @user.github_url %>
+              
+              <!--iframe src="http://ghbtns.com/github-btn.html?user=<%= @user.github %>&type=follow"
+                allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20" class="github_follow_button"></iframe-->
+            </li>
+          <% end %>
+          
+          <% if @user.dribbble.present? %>
+            <li><h6><i class="icon-asterisk"></i> Dribbble:</h6> <%= link_to @user.dribbble, @user.dribbble_url %></li>
+          <% end %>
+          
+          <% if @user.pinterest.present? %>
+            <li><h6><i class="icon-pinterest"></i> Pinterest:</h6> <%= link_to @user.pinterest, @user.pinterest_url %></li>
+          <% end %>
+          
+          <% if @user.linkedin.present? %>
+            <li><h6><i class="icon-linkedin"></i> LinkedIn:</h6> <%= link_to @user.linkedin, @user.linkedin_url %></li>
+          <% end %>
+          
+          <% if @user.website.present? %>
+            <li><h6><i class="icon-globe"></i> Website:</h6> <%= link_to @user.website, @user.website %></li>
+          <% end %>
+        </ul>
+
+        <a href="/" class="pull-right"><i class="icon-arrow-left"></i>Back</a>
+      </div>
+    </div>
+
+  </div>
+</div>

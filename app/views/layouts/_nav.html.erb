@@ -1,0 +1,64 @@
+<div class="span7 navigation">
+  <div class="navbar hidden-phone">
+
+    <ul class="nav" id="omawho_nav">
+      <% if current_user %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="<%= profile_path %>">Your Face <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Edit Face", :profile %></li>
+            <li><%= link_to "Logout", :logout %></li>
+          </ul>
+        </li>
+      <% else %>
+        <li><%= link_to "Add Your Face", :signup %></li>
+        <li><%= link_to "Login", :login %></li>
+      <% end %>
+      
+      <li><%= link_to "Events", :events %></li>
+      <li><%= link_to "About", :why %></li>
+      
+      <% if !@site_twitter.blank? %>
+        <li class="last"><a href="http://twitter.com<%= @site_twitter %>"><i class="icon-twitter"></i></a></li>
+      <% end %>
+      
+      <li id="facebook_thing">
+        <div class="fb-like" data-href="<%= @site_url %>" data-send="false" data-layout="button_count" data-width="145" data-show-faces="false"></div>
+      </li>
+    </ul>
+
+  </div>
+
+  <!-- Mobile Nav
+  ================================================== -->
+  <form action="#" id="mobile-nav" class="visible-phone">
+    <div class="mobile-nav-select">
+      <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+        <optgroup label="<%= @site_title %>">
+          <option value="">Navigate...</option>
+          
+          <% if current_user %>
+            <%= content_tag "option", "Edit Face", :value => profile_path %>
+            <%= content_tag "option",  "Logout", :value => logout_path %>
+          <% else %>
+            <%= content_tag "option",  "Add Your Face", :value => signup_path %>
+            <%= content_tag "option",  "Login", :value => login_path %>
+          <% end %>
+        </optgroup>
+        
+        <optgroup label="Categories">
+          <%= content_tag "option",  "All", :value => root_path %>
+          
+          <% @all_active_categories.each do |k, v| %>
+            <%= content_tag "option",  v, :value => category_path(k) %>
+          <% end %>
+        </optgroup>
+        
+        <optgroup label="More">
+          <%= content_tag "option",  "Events", :value => events_path %>
+          <%= content_tag "option",  "About", :value => why_path %>
+        </optgroup>
+      </select>
+    </div>
+  </form>
+</div>

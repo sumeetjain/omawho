@@ -1,0 +1,25 @@
+<% @page_title = "Reset Password" %>
+<% @page_description = "Reset your password." %>
+
+<h1>Choose a new password</h1>
+
+<p>You're resetting the password for the <strong><%= @user.username %></strong> account (<%= @user.email %>).</p>
+
+<%= form_for @user, :url => password_reset_path(@user), :html => {:method => :put, :class => "form-inline"} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    
+  <%= f.password_field :password, :placeholder => "New Password" %>
+
+  <%= hidden_field_tag :token, @token %>
+  <%= f.submit "Reset Password", :class => "btn" %>
+<% end %>

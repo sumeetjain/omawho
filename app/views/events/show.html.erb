@@ -1,0 +1,77 @@
+<!-- Page Content
+================================================== --> 
+<div class="row" id="omawho_event">
+
+  <!-- Gallery Items
+  ================================================== --> 
+  <div class="span12 gallery">
+    
+    <h4 id="event_header"><%= @event.name %></h4>
+    <h5>
+      <%= @event.date.to_s(:full) %><br />
+      
+      <% if @event.venue.present? %>
+        <%= @event.venue %><br />
+      <% end %>
+      
+      <span class="event_city muted"><%= @event.location %></span>
+    </h5>
+    
+    <% if !current_user %>
+      <p><%= link_to "Log in to mark your attendance.", login_path(:return_to_url => event_path(@event.slug)), :class => "btn btn-primary btn-mini" %></p>
+    <% end %>
+    
+    <% if current_user && @event.is_current %>
+      <%= form_tag event_attend_path(@event.id) do %>
+        <% if @event.link.present? %>
+          <%= link_to "Event Website", @event.link, :class => "btn btn-mini" %>
+        <% end %>&nbsp;
+        
+        <% if current_user.events.exists?(@event) %>
+          <%= button_tag "Cancel Your Attendance", :type => "submit", :class => "btn btn-danger btn-mini" %>
+        <% else %>
+          <%= button_tag "Attend", :type => "submit", :class => "btn btn-primary btn-mini" %>
+        <% end %>
+      <% end %>
+    <% end %>
+    
+    <hr />
+    
+    <% if @event_categories.length > 0 %>
+      <ul id="filterOptions" class="gallery-cats clearfix">
+        <li class="active"><a href="#" class="all">All</a></li> 
+      
+        <% @event_categories.each do |k, v| %>
+          <li><a href="#" class="<%= k %>"><%= v %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="row clearfix" id="faces">
+      <ul class="gallery-post-grid holder <%= "quiz" if @quiz %>">
+        
+        <% if @users.length > 0 %>
+          <% @users.each do |user| %>
+            <% if user.image %>
+              <li  class="span3 gallery-item" data-id="id-<%= user.id %>" data-type="<%= user.category %>">
+                <%= link_to "", view_profile_path(user.username), :class => "gallery-hover-4col hidden-phone hidden-tablet quiz_link" %>
+                <%= link_to image_tag(user.image.file.square, :alt => user.name), view_profile_path(user.username), :class => "quiz_link" %>
+                <span class="project-details">
+                  <%= link_to user.name, view_profile_path(user.username), :class => "user_name" %>
+                  <%= User::CATEGORIES[user.category] %>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="span12">
+            <h5>Bummer, no one's attending this event yet.</h5>
+          </div>
+        <% end %>
+
+      </ul>
+    </div>
+
+  </div><!-- End gallery list-->
+
+</div><!-- End container row -->

@@ -1,0 +1,15 @@
+<%= form_for(@event) do |f| %>
+  <%= form_errors @event, "Event" %>
+
+  <%= f.text_field :name, :placeholder => "Event Name" %><br />
+
+  <%= f.datetime_select :date, {:ampm => true, :start_year => Time.now.year, :end_year => Time.now.year + 3, :default => {:hour => 12, :minute => 00}, :use_short_month => true, :order => [:month, :day, :year], :discard_hour => true}, {:class => "input-small"} %><br />
+
+  <%= f.text_field :venue, :placeholder => "Venue (optional)" %><br />
+  
+  <%= f.text_field :location, :placeholder => "City" %><br />
+
+  <%= f.text_field :link, :placeholder => "Website (optional)" %><br />
+
+  <p><%= f.submit "Submit Event", :class => "btn" %></p>
+<% end %>

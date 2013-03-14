@@ -1,0 +1,11 @@
+<% @page_title = "Edit Your Face" %>
+<% @page_description = "Edit your profile on Omawho." %>
+
+<h1>Your profile</h1>
+
+<%= render :partial => "form" %>
+
+<div>
+  <hr />
+  <p><%= link_to 'Delete your profile', @user, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></p>
+</div>

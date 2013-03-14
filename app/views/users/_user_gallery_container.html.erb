@@ -1,0 +1,9 @@
+<div class="row clearfix">
+  <ul class="gallery-post-grid holder" id="user_gallery_list">
+    <%= render :partial => "user_gallery" %>
+  </ul>
+</div>
+
+<div id="append_and_paginate">
+  <%= will_paginate @users %>
+</div>

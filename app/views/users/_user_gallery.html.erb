@@ -1,0 +1,14 @@
+<% @users.each do |user| %>
+  <li class="span3 gallery-item" data-id="id-<%= user.id %>" data-type="<%= user.category %>">
+    <% if user.image %>
+      <%= link_to image_tag(user.image.file.square, :alt => user.name), view_profile_path(user.username), :class => "quiz_link" %>
+    <% else %>
+      <%= link_to image_tag("default_pic.jpg", :alt => user.name), view_profile_path(user.username), :class => "quiz_link" %>
+    <% end %>
+    
+    <span class="project-details">
+      <%= link_to user.name, view_profile_path(user.username), :class => "user_name" %>
+      <%= User::CATEGORIES[user.category] %>
+    </span>
+  </li>
+<% end %>

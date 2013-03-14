@@ -1,0 +1,14 @@
+<%= form_tag user_sessions_path, :method => :post do %>
+  <%= text_field_tag :username, params[:username], :class => "input-medium", :placeholder => "Username/Email" %>
+  <%= password_field_tag :password, "", :class => "input-medium", :placeholder => "Password" %>
+
+  <label class="checkbox">
+    <%= check_box_tag :remember %> Remember Me
+  </label>
+  
+  <% if params[:return_to_url].present? %>
+    <%= hidden_field_tag "return_to_url", params[:return_to_url] %>
+  <% end %>
+  
+  <%= submit_tag "Log in", :class => "btn" %>
+<% end %>

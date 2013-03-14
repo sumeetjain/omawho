@@ -1,0 +1,271 @@
+@mixin transition($property, $speed){
+	-webkit-transition: $property $speed ease-in; /*Safari & Chrome*/
+	transition: $property $speed ease-in;
+	-moz-transition: $property $speed ease-in; /* Firefox 4 */
+	-o-transition: $property $speed ease-in; /* Opera */
+}
+
+body{
+  background: url(/assets/bg.png);
+}
+
+hr{
+  border-top: 1px solid #EB2B2E;
+  border-bottom: 1px solid #666;
+}
+
+input[type="file"]{
+  line-height: 1;
+  height: auto;
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+#upload_profile_photo_container{
+  overflow: hidden;
+  
+  img{
+    width: 45px;
+  }
+  
+  .pull-left{
+    margin-right: 10px;
+  }
+  
+  #profile_photo_field, #profile_photo_after, #profile_photo_success{
+    position: relative;
+    top: 14px;
+  }
+  
+  @media (max-width: 480px) {
+    #profile_photo_field, #profile_photo_after, #profile_photo_success{
+      position: static;
+      margin-top: 10px;
+    }
+  }
+}
+
+.profile_fields{
+  margin-bottom: 20px;
+}
+
+.twitter-follow-button, .github_follow_button{
+  position: relative;
+  top: 1px;
+}
+
+input.error{
+  background: #FEE4E6;
+}
+
+#bwb{
+  height: 30px;
+  margin-right: 15px;
+}
+
+.gallery-cats li.active{
+  font-weight: bold;
+}
+
+.quiz {
+  .face_shown{
+    opacity: 0.5;
+    
+    &:hover{
+      opacity: 1;
+    }
+    
+    img{
+      -webkit-filter: none !important;
+      -moz-filter: none !important;
+      filter: none !important;
+      cursor: default;      
+    }
+  }
+  
+  .user_name{
+    visibility: hidden;
+  }
+}
+
+.user_name{
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#quiz_header, #event_header{
+  @include transition(all, 0.1s);
+  
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  display: inline-block;
+  background: #ef4f1d;
+  color: #fff;
+  padding: 3px;
+  border: 1px solid #fff;
+
+  &.inactive{
+    background: transparent;
+    color: #999;
+    border: 1px solid #999;
+    
+    &:hover{
+      background: #fff;
+      color: #888;
+    }
+  }
+}
+
+#event_header{
+  cursor: default;
+  border: none;
+  margin-bottom: 0;
+}
+
+#facebook_thing{
+  padding-left: 10px;
+  padding-right: 10px;
+    
+  iframe{
+    position: relative;
+    top: 9px;
+  }
+}
+@media (max-width: 979px){
+  #facebook_thing{
+    display: none;
+  }
+}
+
+#append_more_results{
+  text-align: center;
+  
+  a{
+    display: block;
+    
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  
+  &:hover{
+    background: #ef4f1d;
+    
+    a{
+      color: #fff;
+    }
+  }
+}
+#append_and_paginate{
+  text-align: center;
+}
+#paginate_loading{
+  display: none;
+}
+
+#user_gallery{
+  .gallery-item img{
+    &:hover{
+      -webkit-filter: contrast(125%);
+      -moz-filter: contrast(125%);
+      filter: contrast(125%);
+    }
+  }
+  
+  .row.clearfix{
+    margin-bottom: 10px;
+  }
+}
+
+#filterOptions li{
+  color: #ef4f1d;
+}
+
+@media (max-width: 480px) {
+  .gallery-cats {
+    display: block
+  }
+}
+@media (max-width: 767px) {
+  .gallery-cats li {
+    border: 0;
+    padding: 0 15px 15px 0;
+    a{
+      padding: 5px;
+      background: #fff;
+    }
+    .icon-spinner{
+      display: none;
+    }
+  }
+}
+
+.event_location{
+  text-transform: uppercase;
+  font-weight: bold;
+  
+  .venue{
+    display: block;
+    text-transform: none;
+    font-weight: normal;
+  }
+}
+
+.event_city{
+  font-size: 80%;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.past_events{
+  td{
+    @include transition(all, 0.1s);
+    opacity: 0.5;
+  }
+  
+  tr:hover{
+    td{
+      opacity: 1;
+    }
+  }
+}
+
+#spn_built{
+  @include transition(all, 0.1s);
+  
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  z-index: 9999;
+  opacity: 0.5;
+  
+  &:hover{
+    opacity: 1;
+  }
+}
+
+.footer-container{
+  * {
+    -webkit-text-size-adjust: none;
+  }
+}
+
+.logo{
+  line-height: 1;
+  a{
+    font-family: 'Signika', sans-serif;
+    font-size: 70px;
+    text-transform: uppercase;
+    letter-spacing: -3px;
+    font-weight: bold;
+    color: #ef4f1d;
+    
+    &:hover{
+      text-decoration: none;
+      background: #ef4f1d;
+      color: #fff;
+    }
+  }
+}

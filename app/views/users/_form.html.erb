@@ -1,0 +1,109 @@
+<%= form_for(@image, :html => {:multipart => true, :id => "upload_profile_photo"}, :remote => true) do |f| %>
+  <div id="upload_profile_photo_container">
+    <div class="pull-left">
+      <%= image_tag((@user.image ? @user.image.file.square : "theme/user-avatar.jpg"), :alt => "This is you! (?)", :id => "profile_photo_preview", :class => "img-polaroid") %>
+    </div>
+    
+    <div class="pull-left">
+      <div id="profile_photo_before">
+        <%= f.file_field :file, :id => "profile_photo_field" %>
+        <%= f.submit "Upload", :style => "display: none" %>
+      </div>
+      <div id="profile_photo_after" style="display: none">
+        <%= image_tag("loading.gif", :alt => "Loading...") %>
+      </div>
+      <div id="profile_photo_success" style="display: none">
+        <i class="icon-ok"></i>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= form_for(@user, :html => {:id => "user_form"}) do |f| %>
+  <%= f.hidden_field :image_id, :id => "profile_photo_id" %>
+  
+  <%= form_errors @user, "Profile" %>
+  
+  <div class="row">
+    <div class="span5">
+      <div class="profile_fields">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-user"></i></span>
+          <%= f.text_field :name, :placeholder => "Full Name", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-heart"></i></span>
+          <%= f.text_field :username, :placeholder => "Username", :class => "input-xlarge" %>
+        </div>
+
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-envelope"></i></span>
+          <%= f.text_field :email, :placeholder => "Email", :class => "input-xlarge" %>
+        </div>
+
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-lock"></i></span>
+          <%= f.password_field :password, :placeholder => "Password", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-certificate"></i></span>
+          <%= f.select :category, User::CATEGORIES.map {|k,v| [v, k]}, :include_blank => "Choose a category." %>
+        </div>
+      </div>
+      
+      <div class="profile_fields">
+        <p>Add your web presence and bio. All fields are optional.</p>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-suitcase"></i></span>
+          <%= f.text_field :company, :placeholder => "Company", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-twitter"></i></span>
+          <%= f.text_field :twitter, :placeholder => "Twitter", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-facebook"></i></span>
+          <%= f.text_field :facebook, :placeholder => "Facebook", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-github"></i></span>
+          <%= f.text_field :github, :placeholder => "Github", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-asterisk"></i></span>
+          <%= f.text_field :dribbble, :placeholder => "Dribbble", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-pinterest"></i></span>
+          <%= f.text_field :pinterest, :placeholder => "Pinterest", :class => "input-xlarge" %>
+        </div>
+        
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-linkedin"></i></span>
+          <%= f.text_field :linkedin, :placeholder => "LinkedIn", :class => "input-xlarge" %>
+        </div>
+
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-globe"></i></span>
+          <%= f.text_field :website, :placeholder => "Website", :class => "input-xlarge" %>
+        </div>
+      </div>
+      
+      <div class="profile_fields">
+        <div>
+          <%= f.text_area :bio, :placeholder => "Bio", :class => "span4", :rows => 3, :maxlength => 140 %>
+        </div>
+      </div>
+      
+      <%= f.submit "Submit", :disabled => (@user.image ? false : true), :class => "btn btn-inverse", :id => "submit_add_form" %>
+    </div>
+  </div>
+<% end %>

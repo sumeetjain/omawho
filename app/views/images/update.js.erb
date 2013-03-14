@@ -1,0 +1,9 @@
+<% if @image.errors.empty? %>
+  $("#profile_photo_id").val("<%= @image.id %>");
+  $('#profile_photo_preview').attr("src", "<%= @image.file.square %>");
+  $("#user_form input[type=submit]").removeAttr("disabled");
+  $('#profile_photo_after').hide();
+  $('#profile_photo_success').show();
+<% else %>
+  alert('<%= @image.errors.messages[:file].join(". ") %>');
+<% end %>

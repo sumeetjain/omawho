@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:full] = "%a, %B %d"

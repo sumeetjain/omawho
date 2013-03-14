@@ -1,0 +1,42 @@
+<td>
+  <h5><%= link_to event.name, event_path(event.slug) %></h5>
+  <%= event.date.to_s(:full) %>
+</td>
+<td class="event_location">
+  <%= content_tag("span", event.venue, :class => "venue") if event.venue.present? %>
+  <small class="muted"><%= event.location %></small>
+</td>
+<td>
+  <% if event.link.present? %>
+    <%= link_to "Event Website", event.link, :class => "btn btn-mini btn-link" %>
+  <% end %>
+</td>
+
+<% if event.approved? %>
+  <td><%= link_to "#{event.users.count} #{event.is_current ? "attending" : "attended"}", event_path(event.slug), :class => "btn btn-mini" %></td>
+
+  <% if current_user %>
+    <td>
+      <% if event.is_current %>
+        <%= form_tag event_attend_path(event.id), :remote => true, :class => "event_row_form" do %>
+          <% if @user_events.exists?(event) %>
+            <%= button_tag "Cancel Your Attendance", :type => "submit", :class => "btn btn-danger btn-mini attend_event" %>
+          <% else %>
+            <%= button_tag "Attend", :type => "submit", :class => "btn btn-primary btn-mini attend_event" %>
+          <% end %>
+      
+          <%= image_tag("loading.gif", :alt => "Loading...", :class => "event_row_loading", :style => "display: none") %>
+        <% end %>
+      <% else %>
+        &nbsp;
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      <%= link_to "Log in to mark your attendance.", login_path(:return_to_url => event_path(event.slug)), :class => "btn btn-primary btn-mini" %>
+    </td>
+  <% end %>
+<% else %>
+  <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <td><%= link_to 'Approve', event_approve_path(event.id), method: :put %></td>
+<% end %>
