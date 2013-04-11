@@ -5,9 +5,9 @@ module ApplicationHelper
   
   def page_title
     if @page_title.present?
-      raw "Omawho - #{@page_title}"
+      raw "#{@site_title} - #{@page_title}"
     else
-      "Omawho"
+      @site_title
     end
   end
   
@@ -15,7 +15,7 @@ module ApplicationHelper
     if @page_description.present?
       raw @page_description
     else
-      raw "The faces of Omaha's creative community. Add your own face to the gallery for free."
+      raw "The faces of #{@site_location}'s creative community. Add your own face to the gallery for free."
     end
   end
   
@@ -23,7 +23,7 @@ module ApplicationHelper
     if @blurb.present?
       @blurb
     else
-      "The faces of Omaha's creative community."
+      "The faces of #{@site_location}'s creative community."
     end
   end
 end

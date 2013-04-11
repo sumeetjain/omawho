@@ -16,7 +16,6 @@ jQuery ->
   
   # Attend Event Buttons
   $(document).on 'click', '.attend_event', (e) ->
-    _gaq.push(['_trackEvent', 'Events', 'Attend', $(this).text()])
     $(this).hide().parent().append('<i class="icon-spinner icon-spin"></i>')
       
   # If this page contains a faces gallery...
@@ -24,18 +23,15 @@ jQuery ->
     
     # Show face's name in Quiz Mode.
     $(document).on 'click', '.quiz .quiz_link', (e) ->
-      _gaq.push(['_trackEvent', 'Quiz', 'Reveal', $(this).attr('alt')])
       $(this).parent().find('.user_name').css("visibility", "visible")
       $(this).parents('li').first().addClass("face_shown")
       e.preventDefault()
       
     $(document).on 'click', '#quiz_header', (e) ->
       if $(this).hasClass("inactive")
-        _gaq.push(['_trackEvent', 'Quiz', 'Activate'])
         $(this).removeClass("inactive").find("span").text('OK: Names are hidden! Click faces to reveal.')
         window.activate_quiz(true)
       else
-        _gaq.push(['_trackEvent', 'Quiz', 'Deactivate'])
         $(this).addClass("inactive").find("span").text('Activate Quiz Mode.')
         window.activate_quiz(false)
 
@@ -48,7 +44,6 @@ jQuery ->
     
     # Replace pagination with dynamic loader.
     $(document).on 'click', '#append_more_results', (e) ->
-      _gaq.push(['_trackEvent', 'Gallery', 'Pagination'])
       url = $('.pagination .next_page').attr('href')
   
       $('#append_more_results').hide()
@@ -72,7 +67,6 @@ jQuery ->
         
     # Category Filters: Load faces via XHR.
     $(document).on 'click', '#filterOptions a', (e) ->
-      _gaq.push(['_trackEvent', 'Filters', $(this).text()])
       filter_li = $(this).parent()
       filter_li.append(' <i class="icon-spinner icon-spin filter_loading"></i>')
       url = $(this).attr('href')
