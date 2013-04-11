@@ -4,7 +4,7 @@ Omawho is a self-hosted gallery of your community's creative faces. It's an
 easy way to gather and browse the people you're likely to run into at
 events around your town.
 
-![Omawho for Omaha](http://omawho.com/assets/omawho-share-c2aeb14a3f36ce0ad996bb2c24cf1f72.png)
+[![Omawho for Omaha](http://omawho.com/assets/omawho-share-c2aeb14a3f36ce0ad996bb2c24cf1f72.png)](http://www.omawho.com)
 
 ## Background
 
@@ -29,6 +29,13 @@ a certain event.
 
 Anyone can submit new events for the list. As the "Admin" user, you have to
 approve submitted events before they show up to the public.
+
+### Existing "Forks"
+
+Communities are already setting up their own "Omawho"s! Check 'em out:
+
+- http://siouxwho.com (Sioux City, Iowa)
+- http://ilivedinomaha.com (Omaha Expats)
 
 ## Setup
 
