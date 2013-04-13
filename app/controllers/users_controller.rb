@@ -1,6 +1,21 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login, :except => [:edit, :update, :destroy]
   
+  def feed
+    @feed_title = "#{@site_title}"
+    @feed_items = User.order("created_at DESC")
+
+    # Feed's update timestamp:
+    @updated = @feed_items.first.created_at unless @feed_items.empty?
+
+    respond_to do |format|
+      format.atom { render :layout => false }
+
+      # Redirect RSS permanently to ATOM.
+      format.rss { redirect_to feed_path(:format => :atom), :status => :moved_permanently }
+    end
+  end
+  
   # GET /users
   # GET /users.json
   def index

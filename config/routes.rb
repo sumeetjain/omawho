@@ -22,6 +22,7 @@ Omawho::Application.routes.draw do
   match 'event/:event' => 'users#index', :as => :event
   match 'category/:category' => 'users#index', :as => :category
   
+  match '/feed' => 'users#feed', :as => :feed, :defaults => {:format => 'atom'}
   root :to => 'users#index'
   
   match ':username' => 'users#show', :as => :view_profile
