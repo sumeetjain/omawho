@@ -13,7 +13,7 @@
       </h5>
 
       <% if !current_user %>
-        <p><%= link_to "Log in to mark your attendance.", login_path(:return_to_url => event_path(@event.slug)), :class => "btn btn-primary btn-mini" %></p>
+        <p><%= link_to "Sign in to mark your attendance.", login_path(:return_to_url => event_path(@event.slug)), :class => "btn btn-primary btn-mini" %></p>
       <% end %>
 
       <% if current_user && @event.is_current %>
